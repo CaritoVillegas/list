@@ -13,5 +13,8 @@ public class Main {
         lista1.add(4);
 
         System.out.println("El tamaño es"+ lista1.getSize());
+        int data = lista1.get(2);
+        System.out.println("El tamaño es"+ data);
+        lista1.delate(4);
     }
 }
