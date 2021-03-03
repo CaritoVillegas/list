@@ -1,5 +1,6 @@
 package UASLP.ingenieria;
 
+import UASLP.ingenieria.list.Iterator;
 import UASLP.ingenieria.list.LinkedList;
 
 
@@ -12,9 +13,11 @@ public class Main {
         lista1.add(3);
         lista1.add(4);
 
-        System.out.println("El tamaño es"+ lista1.getSize());
-        int data = lista1.get(2);
-        System.out.println("El tamaño es"+ data);
-        lista1.delate(4);
+
+        Iterator it=lista1.getIterator();
+        while(it.hasNext()){
+            int element = it.next();//regresar el dato y avanzar
+            System.out.println("dato" + element);
+        }
     }
 }

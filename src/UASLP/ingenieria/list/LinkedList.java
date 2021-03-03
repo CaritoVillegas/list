@@ -43,10 +43,13 @@ public class LinkedList {
         if(index < 0 || index >= size){
             return;
         }
+        size--;
+
 
         if(index == 0){
             head = head.getNext();
             head.setPrevius(null);
+            return;
         }
 
         if(index == size-1){
@@ -63,7 +66,15 @@ public class LinkedList {
             currentNode.getPrevius().setNext(currentNode.getNext());
             currentNode.getNext().setPrevius(currentNode.getPrevius());
         }
-        size--;
 
     }
+
+    public Iterator getIterator(){
+        return new Iterator(head);
+    }
+
+    //iteradores->patron de diseño
+    /*public int getSize(){
+        return size;
+    }*/
 }
