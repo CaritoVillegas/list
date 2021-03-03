@@ -3,6 +3,9 @@ package UASLP.ingenieria.list;
  * lista doblemente ligada
 */
 public class LinkedList {
+    public static final int BEFORE = 0;
+    public static final int AFTER = 1;
+
     private Node head;
     private Node tail;
     private int size;
@@ -10,7 +13,7 @@ public class LinkedList {
     public void add(int data){
         Node node = new Node(data);
 
-        node.setPrevius(tail);
+        node.setPrevious(tail);
         if(tail != null){
             tail.setNext(node);
         }
@@ -22,9 +25,6 @@ public class LinkedList {
         size++;
     }
 
-    public int getSize() {
-        return size;
-    }
 
     public int get(int index){
         Node currentNode = head;
@@ -45,16 +45,21 @@ public class LinkedList {
         }
         size--;
 
-
-        if(index == 0){
-            head = head.getNext();
-            head.setPrevius(null);
+        if (size == 0) {
+            head = null;
+            tail = null;
             return;
         }
 
+        if(index == 0){
+            head = head.getNext();
+            head.setPrevious(null);
+
+        }
+
         if(index == size-1){
-            tail = tail.getPrevius();
-            tail.setPrevius(null);
+            tail = tail.getPrevious();
+            tail.setPrevious(null);
 
         }
 
@@ -63,8 +68,8 @@ public class LinkedList {
                 currentNode = currentNode.getNext();
                 currentIndex++;
             }
-            currentNode.getPrevius().setNext(currentNode.getNext());
-            currentNode.getNext().setPrevius(currentNode.getPrevius());
+            currentNode.getPrevious().setNext(currentNode.getNext());
+            currentNode.getNext().setPrevious(currentNode.getPrevious());
         }
 
     }
@@ -73,8 +78,44 @@ public class LinkedList {
         return new Iterator(head);
     }
 
-    //iteradores->patron de diseño
-    /*public int getSize(){
+    public void insert(int data, int position, Iterator it) {
+        // ¿qué ofrece java para restringir los valores de position a solamente BEFORE y AFTER?
+
+        Node newNode = new Node(data);
+        Node currentNode = it.getCurrentNode();
+
+        if (position == AFTER) {
+            newNode.setNext(currentNode.getNext());
+            newNode.setPrevious(currentNode);
+            currentNode.setNext(newNode);
+            if (newNode.getNext() != null) {
+                newNode.getNext().setPrevious(newNode);
+            } else {
+                tail = newNode;
+            }
+        } else if (position == BEFORE) {
+            newNode.setPrevious(currentNode.getPrevious());
+            newNode.setNext(currentNode);
+            currentNode.setPrevious(newNode);
+            if (newNode.getPrevious() != null) {
+                newNode.getPrevious().setNext(newNode);
+            } else {
+                head = newNode;
+            }
+        } else {
+            System.out.println("No conozco el valor de position");
+        }
+        size++;
+    }
+
+
+    //Iterador -> patrón de diseño
+
+    public int getSize() {
         return size;
-    }*/
+    }
+
+    public ReverseIterator getReverseIterator() {
+        return new ReverseIterator(tail);
+        }
 }

@@ -2,10 +2,10 @@ package UASLP.ingenieria.list;
 
 public class Node {
     private int data;
-    private Node previus;
+    private Node previous;
     private Node next;
 
-    Node (int data){
+    Node(int data){
         this.data = data;
     }
 
@@ -13,16 +13,16 @@ public class Node {
         return data;
     }
 
-    public void setDato(int data) {
+    public void setData(int data) {
         this.data = data;
     }
 
-    public Node getPrevius() {
-        return previus;
+    public Node getPrevious() {
+        return previous;
     }
 
-    public void setPrevius(Node previus) {
-        this.previus = previus;
+    public void setPrevious(Node previous) {
+        this.previous = previous;
     }
 
     public Node getNext() {
