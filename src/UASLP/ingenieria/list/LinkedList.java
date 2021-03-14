@@ -2,16 +2,105 @@ package UASLP.ingenieria.list;
 /** javadoc
  * lista doblemente ligada
 */
-public class LinkedList {
-    public static final int BEFORE = 0;
-    public static final int AFTER = 1;
-
-    private Node head;
-    private Node tail;
+public class LinkedList<G> {
+    private Node<G> head;
+    private Node<G> tail;
     private int size;
 
-    public void add(int data){
-        Node node = new Node(data);
+    public LinkedList(){
+        listaCount ++;
+    }
+    private static int listaCount=0;
+    public static int getListaCount(){
+        return listaCount;
+    }
+
+    private static class Node<T>{
+        private T data;
+        private Node<T> previous;
+        private Node<T> next;
+
+        Node(T data){
+            this.data=data;
+        }
+        public T getData() {
+            return data;
+        }
+
+        public void setData(T data) {
+            this.data = data;
+        }
+
+        public Node<T> getPrevious() {
+            return previous;
+        }
+
+        public void setPrevious(Node<T> previous) {
+            this.previous = previous;
+        }
+
+        public Node<T> getNext() {
+            return next;
+        }
+
+        public void setNext(Node<T> next) {
+            this.next = next;
+        }
+    }
+
+    public class ReverseIterator {
+        private Node<G> currentNode;
+
+        ReverseIterator(Node<G> tail)
+        {
+            currentNode = tail;
+        }
+
+        public boolean hasNext(){
+            return currentNode != null;
+        }
+
+        public G next(){
+            G data = currentNode.getData();
+
+            currentNode = currentNode.getPrevious();
+
+            return data;
+        }
+
+    }
+    //ITE
+
+    public class Iterator {
+        private Node<G> currentNode;
+
+        public Iterator() {
+            this.currentNode = head;
+        }
+
+        public Iterator(Iterator iterator) {
+            currentNode = iterator.currentNode;
+        }
+
+        public boolean hasNext() {
+            return currentNode != null;
+        }
+
+        public G next() {
+            G data = currentNode.getData();
+
+            currentNode = currentNode.getNext();
+
+            return data;
+        }
+
+        Node<G> getCurrentNode() {  // modificador de acceso se llama -> package-private
+            return currentNode;
+        }
+    }
+
+    public void add(G data){
+        Node<G> node = new Node<>(data);
 
         node.setPrevious(tail);
         if(tail != null){
@@ -26,8 +115,8 @@ public class LinkedList {
     }
 
 
-    public int get(int index){
-        Node currentNode = head;
+    public G get(int index){
+        Node<G> currentNode = head;
         int currentIndex = 0;
         while(currentIndex < index){
             currentNode=currentNode.getNext();
@@ -37,7 +126,7 @@ public class LinkedList {
     }
 
     public void delate(int index){
-        Node currentNode = head;
+        Node<G> currentNode = head;
         int currentIndex = 0;
 
         if(index < 0 || index >= size){
@@ -75,16 +164,16 @@ public class LinkedList {
     }
 
     public Iterator getIterator(){
-        return new Iterator(head);
+        return new Iterator();
     }
 
-    public void insert(int data, int position, Iterator it) {
+    public void insert(G data, Position position, Iterator it) {
         // ¿qué ofrece java para restringir los valores de position a solamente BEFORE y AFTER?
 
-        Node newNode = new Node(data);
-        Node currentNode = it.getCurrentNode();
+        Node<G> newNode = new Node<>(data);
+        Node<G> currentNode = it.getCurrentNode();
 
-        if (position == AFTER) {
+        if (position == Position.AFTER) {
             newNode.setNext(currentNode.getNext());
             newNode.setPrevious(currentNode);
             currentNode.setNext(newNode);
@@ -93,7 +182,7 @@ public class LinkedList {
             } else {
                 tail = newNode;
             }
-        } else if (position == BEFORE) {
+        } else if (position == Position.BEFORE) {
             newNode.setPrevious(currentNode.getPrevious());
             newNode.setNext(currentNode);
             currentNode.setPrevious(newNode);
