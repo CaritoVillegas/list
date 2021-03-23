@@ -3,7 +3,6 @@ package UASLP.ingenieria.list;
 public interface List<T> {
     void add(T data);
     T get(int index);
-
     void delate(int index);
 
     int getSize();

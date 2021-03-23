@@ -194,6 +194,7 @@ public class LinkedList<G> implements List<G>{
             System.out.println("No conozco el valor de position");
         }
         size++;
+
     }
 
 
