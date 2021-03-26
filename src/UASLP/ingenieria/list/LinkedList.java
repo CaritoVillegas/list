@@ -113,6 +113,10 @@ public class LinkedList<G> implements List<G>{
         tail = node;
         size++;
     }
+    @Override
+    public Iterator<G> getIterator(){
+        return new FormardIterator();
+    }
 
     @Override
     public G get(int index){        Node<G> currentNode = head;
@@ -161,10 +165,7 @@ public class LinkedList<G> implements List<G>{
         }
 
     }
-    @Override
-    public Iterator<G> getIterator(){
-        return new FormardIterator();
-    }
+
     @Override
     public void insert(G data, Position position, Iterator<G> it) {
         // ¿qué ofrece java para restringir los valores de position a solamente BEFORE y AFTER?
