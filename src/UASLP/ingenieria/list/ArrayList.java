@@ -1,6 +1,6 @@
 package UASLP.ingenieria.list;
 
-public class ArrayList <H> implements List<H>{
+public class ArrayList <H> implements List<H> {
 
     //List->Coleccion de elementos que mantienen el orden en el que fueron insertados
     //Ordered->Orden en el que fueron insertados
@@ -13,8 +13,8 @@ public class ArrayList <H> implements List<H>{
     private Object array[];
     private int size;
 
-    public ArrayList(){
-        this.array=new Object[10];
+    public ArrayList() {
+        this.array = new Object[10];
     }
 
     @Override
@@ -22,6 +22,21 @@ public class ArrayList <H> implements List<H>{
 
         this.array[size++] = data;
     }
+
+    //add de sambb uwu
+    //public void add (H data){
+    //if(size>=array.length)
+    //{
+       // Object arrayN[] = new Object[array.length + 2];
+        //for (int i = 0; i < array.length; i++) {
+         //   arrayN[i] = array[i];
+        //}
+        //this.array = arrayN;
+
+    //}
+    //this.array[size]=data;
+    //size++;
+    //}
 
     @Override
     public H get(int index) {
@@ -67,8 +82,6 @@ public class ArrayList <H> implements List<H>{
         private int current;
         public ForwardIterator(){ this.current = 0; }
 
-        public ForwardIterator(int currentIndex){ this.current = currentIndex; }
-
         @Override
         public boolean hasNext(){ return current<size; }
 
@@ -84,10 +97,6 @@ public class ArrayList <H> implements List<H>{
         private int current;
         public ReverseIterator(){
             this.current = size-1;
-        }
-
-        public ReverseIterator(int currentIntex){
-            this.current = currentIntex;
         }
 
         @Override
