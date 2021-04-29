@@ -67,10 +67,10 @@ public class ArrayList <H> implements List<H> {
         return new ForwardIterator();
     }
 
-    @Override
+   /* @Override
     public void insert(H data, Position position, Iterator<H> it) {
 
-    }
+    }*/
 
     @Override
     public Iterator<H> getReverseIterator() {
