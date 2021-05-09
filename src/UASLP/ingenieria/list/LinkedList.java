@@ -10,7 +10,7 @@ public class LinkedList<G> implements List<G>{
     public LinkedList(){
         listaCount ++;
     }
-    private static int listaCount=0;
+    private static int listaCount=getListaCount();
     public static int getListaCount(){
         return listaCount;
     }
@@ -26,23 +26,15 @@ public class LinkedList<G> implements List<G>{
         public T getData() {
             return data;
         }
-
-        public void setData(T data) {
-            this.data = data;
-        }
-
         public Node<T> getPrevious() {
             return previous;
         }
-
         public void setPrevious(Node<T> previous) {
             this.previous = previous;
         }
-
         public Node<T> getNext() {
             return next;
         }
-
         public void setNext(Node<T> next) {
             this.next = next;
         }
@@ -78,9 +70,9 @@ public class LinkedList<G> implements List<G>{
             this.currentNode = head;
         }
 
-        public FormardIterator(FormardIterator iterator) {
-            currentNode = iterator.currentNode;
-        }
+        //public FormardIterator(FormardIterator iterator) {
+         //   currentNode = iterator.currentNode;
+       // }
 
         public boolean hasNext() {
             return currentNode != null;
@@ -94,9 +86,9 @@ public class LinkedList<G> implements List<G>{
             return data;
         }
 
-        Node<G> getCurrentNode() {  // modificador de acceso se llama -> package-private
-            return currentNode;
-        }
+       // Node<G> getCurrentNode() {  // modificador de acceso se llama -> package-private
+        //    return currentNode;
+       // }
     }
       @Override
     public void add(G data){
@@ -128,12 +120,11 @@ public class LinkedList<G> implements List<G>{
         return currentNode.getData();
     }
     @Override
-    public void delate(int index){
+    public void delate(int index) throws MyIndexOutOfBoundException{
         Node<G> currentNode = head;
         int currentIndex = 0;
-
-        if(index < 0 || index >= size){
-            return;
+        if (index < 0 || index >= size) {
+            throw new MyIndexOutOfBoundException();
         }
         size--;
 
@@ -144,15 +135,14 @@ public class LinkedList<G> implements List<G>{
         }
 
         if(index == 0){
-            head = head.getNext();
-            head.setPrevious(null);
+            head = head.next;
+            head.previous = null;
 
         }
 
         if(index == size){
-            tail = tail.getPrevious();
-            tail.setPrevious(null);
-
+            tail = tail.previous;
+            tail.next = null;
         }
 
         if(index > 0 && index < size){
@@ -163,7 +153,6 @@ public class LinkedList<G> implements List<G>{
             currentNode.getPrevious().setNext(currentNode.getNext());
             currentNode.getNext().setPrevious(currentNode.getPrevious());
         }
-
     }
 
   //  @Override

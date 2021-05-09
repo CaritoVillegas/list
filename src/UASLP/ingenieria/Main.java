@@ -59,7 +59,7 @@ public class Main {
 
             System.out.println("Dato: " + element);
         }
-        lista1.delate(3);
+        //lista1.delate(3);
         System.out.println("---------------------");
 
         it = lista1.getReverseIterator();
@@ -83,7 +83,7 @@ public class Main {
 
             System.out.println("Dato: " + element);
         }
-        lista3.delate(3);
+       // lista3.delate(3);
         System.out.println("---------------------");
 
         ituwu = lista3.getReverseIterator();

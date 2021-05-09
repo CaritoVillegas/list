@@ -20,23 +20,23 @@ public class ArrayList <H> implements List<H> {
     @Override
     public void add(H data) {
 
-        this.array[size++] = data;
+        if(size==array.length){
+            Object[] aux=new Object[array.length+2];
+
+            for(int i=0;i<array.length;i++){
+                aux[i]=array[i];
+            }
+
+            this.array=new Object[aux.length];
+
+            for(int i=0;i<array.length;i++){
+                array[i]=aux[i];
+            }
+        }
+        this.array[size]=data;
+        size++;
     }
 
-    //add de sambb uwu
-    //public void add (H data){
-    //if(size>=array.length)
-    //{
-       // Object arrayN[] = new Object[array.length + 2];
-        //for (int i = 0; i < array.length; i++) {
-         //   arrayN[i] = array[i];
-        //}
-        //this.array = arrayN;
-
-    //}
-    //this.array[size]=data;
-    //size++;
-    //}
 
     @Override
     public H get(int index) {
@@ -46,14 +46,17 @@ public class ArrayList <H> implements List<H> {
     //implementar el iterator y el reverse iterator y que el main funcione igual.
 
     @Override
-    public void delate(int index) {
+    public void delate(int index) throws MyIndexOutOfBoundException {
+        if(index<0 || index>=size){
+            throw new MyIndexOutOfBoundException();
+        }
 
-        for (int i = index; i < size-1; i++) {
-            array[i] = array[i + 1];
+        for(int i=index+1;i<array.length;i++){
+            this.array[i-1]=this.array[i];
         }
         size--;
-
     }
+
 
     @Override
     public int getSize() {
